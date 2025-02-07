@@ -41,7 +41,7 @@ export const TimetablePl = ({
   };
 
   const getLink = () => {
-    const baseStreamUrl = 'https://wssipwg.ap.education/lesson/';
+    const baseStreamUrl = 'https://wssip.ap.education/lesson/';
 
     return baseStreamUrl + course;
   };

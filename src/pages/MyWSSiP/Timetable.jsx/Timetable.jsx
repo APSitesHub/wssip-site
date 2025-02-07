@@ -47,7 +47,7 @@ export const Timetable = ({ user, timetable }) => {
   };
 
   const getLink = () => {
-    const baseStreamUrl = 'https://wssipwg.ap.education/lesson/';
+    const baseStreamUrl = 'https://wssip.ap.education/lesson/';
 
     return marathonId === '83761'
       ? baseStreamUrl + 'logistics'
