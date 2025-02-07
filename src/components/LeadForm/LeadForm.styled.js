@@ -219,9 +219,9 @@ export const FormBtn = styled.button`
   background: linear-gradient(
       322deg,
       var(--main-color) 23.22%,
-      var(--secondary-color) 110.01%
+      var(--accent-color) 110.01%
     ),
-    var(--secondary-color);
+    var(--accent-color);
   border: none;
   flex-shrink: 0;
   cursor: pointer;
@@ -248,10 +248,10 @@ export const FormBtn = styled.button`
 
     background: linear-gradient(
         322deg,
-        var(--secondary-color) -5.61%,
+        var(--accent-color) -5.61%,
         var(--main-color) 93.88%
       ),
-      var(--secondary-color);
+      var(--accent-color);
   }
 
   &:hover,

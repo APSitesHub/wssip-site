@@ -23,60 +23,58 @@ import {
   TimetableWebinarsHead,
 } from './Timetable.styled';
 
-export const Timetable = ({ user, timetable }) => {
+export const TimetablePl = ({
+  user,
+  language,
+  timetable,
+  isMultipleCourses,
+}) => {
+  const [course, setCourse] = useState('logistics');
   const [isAnimated, setIsAnimated] = useState(false);
-  const [marathonId, setMarathonId] = useState('83530');
-  const [personalTimetable, setPersonalTimetable] = useState(
-    timetable.find(timeline => marathonId === timeline.marathon)
-  );
 
   const changeTimetable = () => {
     setIsAnimated(true);
-    setMarathonId(marathonId => (marathonId === '83530' ? '83568' : '83530'));
-    setPersonalTimetable(
-      personalTimetable =>
-        (personalTimetable = timetable.find(timeline =>
-          marathonId === '83530'
-            ? '83568' === timeline.marathon
-            : '83530' === timeline.marathon
-        ))
-    );
+    setCourse(course => (course === 'logistics' ? 'prep' : 'logistics'));
     setTimeout(() => {
       setIsAnimated(false);
     }, 3000);
   };
 
   const getLink = () => {
-    const baseStreamUrl = 'https://wstihwg.ap.education/lesson/';
+    const baseStreamUrl = 'https://wssipwg.ap.education/lesson/';
 
-    return marathonId === '83530'
-      ? baseStreamUrl + 'logistics'
-      : baseStreamUrl + 'prep';
+    return baseStreamUrl + course;
+  };
+
+  const panelStyles = () => {
+    return {
+      top: isMultipleCourses ? '184px' : '142px',
+    };
   };
 
   const link = getLink();
 
-  const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const DAYS = ['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Nd'];
 
   return (
-    <TimetableBox style={{ top: '142px' }}>
+    <TimetableBox style={{ ...panelStyles() }}>
       <TimetableHeading>
         <CalendarIcon />
-        Class schedule
+        Harmonogram zajęć
         <TimetableChangeCourseBtn onClick={changeTimetable}>
           <TimetableChangeCourseBtnText>
             Change course
           </TimetableChangeCourseBtnText>
         </TimetableChangeCourseBtn>
       </TimetableHeading>
-      {!personalTimetable ? (
+      {!timetable ? (
         <PointsPlaceHolder>
           <EyesEmoji src={eyesImg} alt="Eyes emoji" width="80" />
           <PointsPlaceHolderText>
-            Looking for your schedule!
+            Здається, у вас ще немає розкладу!
           </PointsPlaceHolderText>
           <PointsPlaceHolderText>
-            Please, try again later!
+            Але він з'явиться, коли у вас розпочнуться заняття!
           </PointsPlaceHolderText>
         </PointsPlaceHolder>
       ) : (
@@ -86,37 +84,33 @@ export const Timetable = ({ user, timetable }) => {
               <TimetableLessonType
                 className={isAnimated ? 'animated' : undefined}
               >
-                {marathonId === '83530' ? 'Logistics' : 'Preparation Course'}
+                {course === 'logistics' ? 'Logistics' : 'Preparation Course'}
               </TimetableLessonType>
               <TimetableLessonLink href={link} target="_blank">
-                <TimetableLessonLinkText>Go to lesson</TimetableLessonLinkText>
+                <TimetableLessonLinkText>Przejść do</TimetableLessonLinkText>
               </TimetableLessonLink>
             </TimetableWebinarsHead>
             <TimetableTable>
               <thead>
                 <tr>
-                  <TimetableHead className="day">Day</TimetableHead>
-                  <TimetableHead className="time">Time</TimetableHead>
+                  <TimetableHead className="day">Dzień</TimetableHead>
+                  <TimetableHead className="time">Czas</TimetableHead>
                   <TimetableHead className="lessonNumber">
-                    Lesson №
+                    № lekcja
                   </TimetableHead>
-                  <TimetableHead className="topic">Topic</TimetableHead>
+                  <TimetableHead className="teacher">Przedmiot</TimetableHead>
                 </tr>
               </thead>
               <tbody>
-                {personalTimetable.schedule
-                  .filter(
-                    lesson =>
-                      lesson.type.toLowerCase() === 'webinar' ||
-                      lesson.type.toLowerCase() === 'webinar, repeat'
-                  )
+                {timetable
+                  .filter(lesson => course === lesson.marathon)
                   .sort((a, b) => a.day - b.day)
                   .map((lesson, i) => (
                     <TimetableDaysItem
                       key={i}
                       style={
                         lesson.day === new Date().getDay()
-                          ? { backgroundColor: '#0088f780' }
+                          ? { backgroundColor: '#cddc39' }
                           : {}
                       }
                     >
@@ -129,8 +123,8 @@ export const Timetable = ({ user, timetable }) => {
                       <TimetableDaysCell className="lessonNumber">
                         {lesson.lessonNumber}
                       </TimetableDaysCell>
-                      <TimetableDaysCell className="topic">
-                        {lesson.topic}
+                      <TimetableDaysCell className="teacher">
+                        {lesson.subject}
                       </TimetableDaysCell>
                     </TimetableDaysItem>
                   ))}

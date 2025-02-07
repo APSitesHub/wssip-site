@@ -12,12 +12,14 @@ const Stream = lazy(() =>
   import(/* webpackChunkName: "Stream page" */ '../pages/Streams/Stream/Stream')
 );
 
-const MyWSTiH = lazy(() =>
-  import(/* webpackChunkName: "My WSTiH Page" */ '../pages/MyWSTiH/MyWSTiH')
+const MyWSSiP = lazy(() =>
+  import(/* webpackChunkName: "My WSSiP Page" */ '../pages/MyWSSiP/MyWSSiP')
 );
 
-const MyWSTiHPl = lazy(() =>
-  import(/* webpackChunkName: "My WSTiH Demo Page" */ '../pages/MyWSTiH/MyWSTiHPl')
+const MyWSSiPPl = lazy(() =>
+  import(
+    /* webpackChunkName: "My WSSiP Demo Page" */ '../pages/MyWSSiP/MyWSSiPPl'
+  )
 );
 
 const NotFound = lazy(() =>
@@ -34,10 +36,10 @@ export const App = () => {
       />
       <Suspense fallback={Loader} noindex={true}>
         <Routes noindex={true}>
-          <Route path="/" element={<MyWSTiHPl />} noindex={true}>
+          <Route path="/" element={<MyWSSiPPl />} noindex={true}>
             <Route path="*" element={<NotFound />} noindex={true} />
           </Route>
-          <Route path="/demo" element={<MyWSTiH />} noindex={true} />
+          <Route path="/demo" element={<MyWSSiP />} noindex={true} />
           <Route path="lesson" element={<Streams />} noindex={true}>
             <Route path="logistics" element={<Stream />} noindex={true} />
             <Route

@@ -17,10 +17,10 @@ import {
 import { useEffect, useState } from 'react';
 import * as yup from 'yup';
 import { MyPlatform } from './My Platform/MyPlatform';
-import { MyWSTiHPanel } from './MyWSTiHPanel/MyWSTiHPanel';
-import { LoginErrorNote } from './MyWSTiHPanel/MyWSTiHPanel.styled';
+import { MyWSSiPPanel } from './MyWSSiPPanel/MyWSSiPPanel';
+import { LoginErrorNote } from './MyWSSiPPanel/MyWSSiPPanel.styled';
 
-const MyWSTiH = () => {
+const MyWSSiP = () => {
   const [isUserLogged, setIsUserLogged] = useState(false);
   const [timetable, setTimetable] = useState({});
   const [user, setUser] = useState({});
@@ -32,7 +32,7 @@ const MyWSTiH = () => {
   axios.defaults.baseURL = 'https://ap-server-8qi1.onrender.com';
 
   useEffect(() => {
-    document.title = 'My WSTiH | WSTiH';
+    document.title = 'My WSSiP | WSSiP';
 
     const refreshToken = async () => {
       console.log('token refresher');
@@ -118,7 +118,7 @@ const MyWSTiH = () => {
           validationSchema={loginSchema}
         >
           <LoginForm>
-            <LoginLogo src={logo} alt="WSTiH logo" />
+            <LoginLogo src={logo} alt="WSSiP logo" />
             <LoginFormText>
               <StreamAuthTextHello>Hello!</StreamAuthTextHello>
               Our website is not available without authorization. Please enter
@@ -154,7 +154,7 @@ const MyWSTiH = () => {
         </Formik>
       ) : (
         <>
-          <MyWSTiHPanel user={user} link={platformLink} timetable={timetable} />
+          <MyWSSiPPanel user={user} link={platformLink} timetable={timetable} />
           <MyPlatform platformLink={platformLink} />
         </>
       )}
@@ -162,4 +162,4 @@ const MyWSTiH = () => {
   );
 };
 
-export default MyWSTiH;
+export default MyWSSiP;

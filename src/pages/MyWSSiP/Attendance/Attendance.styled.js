@@ -4,7 +4,7 @@ import { ReactComponent as ArrowRight } from '../../../img/svg/month-switch-righ
 import {
   CalendarBtnIcon,
   TimetableBtnIcon,
-} from '../MyWSTiHPanel/MyWSTiHPanel.styled';
+} from '../MyWSSiPPanel/MyWSSiPPanel.styled';
 
 export const AttendanceBox = styled.div`
   position: absolute;
@@ -91,7 +91,7 @@ export const MonthSwitchBox = styled.div`
   background: linear-gradient(
       322deg,
       var(--main-color) 23.22%,
-      var(--secondary-color) 110.11%
+      var(--accent-color) 110.11%
     ),
     #fff;
 `;
